@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>25 + 5 Clock</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center p-5">25+5 Clock</h1>
+            <div class="col-md-6">
+            <div class="card shadow-sm">
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+                <div class="card-header text-center" id="break-label">Break Length</div>
+                <div class="card-body">
+                    <p class="card-text">
+                    <div id="break-length">5</div>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <button id="break-increment" type="button" class="btn btn-sm btn-outline-secondary">+</button>
+                        <button id="break-decrement" type="button" class="btn btn-sm btn-outline-secondary">-</button>
+                    </div>
+                    <!-- <small class="text-body-secondary">9 mins</small> -->
+                    </div>
+                </div>
+                </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+                <div class="card-header text-center" id="session-label" >Session Length</div>
+                <div class="card-body">
+                    <p class="card-text">
+                    <div id="session-length">25</div>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <button id="session-increment" type="button" class="btn btn-sm btn-outline-secondary">+</button>
+                        <button id="session-decrement" type="button" class="btn btn-sm btn-outline-secondary">-</button>
+                    </div>
+                    <!-- <small class="text-body-secondary">9 mins</small> -->
+                    </div>
+                </div>
+                </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+                <div id="timer-label" class="card-header text-center">Session</div>
+                <div class="card-body">
+                    <p class="card-text"></p>
+                    <div id="time-left">25:00</div>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+
+                        <button id="start_stop" class="btn btn-sm btn-outline-secondary">start_stop</button>
+
+                        <button id="reset" type="button" class="btn btn-sm btn-outline-secondary">reset</button>
+                    </div>
+                    <!-- <small class="text-body-secondary">9 mins</small> -->
+                    </div>
+                </div>
+                </div>
+        </div>
+            
+
+    </div>
+    </div>
+    <audio id="beep" preload="auto" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <script src="./timerLogic.js"></script>
+  </body>
+</html>
