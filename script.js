@@ -9,8 +9,10 @@ const breakLength = document.querySelector('#break-length');
 const sessionLength = document.querySelector('#session-length');
 const sessionDecrement = document.querySelector('#session-decrement');
 const sessionIncrement = document.querySelector('#session-increment');
-let isClockRunning = false;
+let audio = document.getElementById('beep');
+// Default Values
 let clockTimer;
+let isClockRunning = false;
 let workSessionDuration = 1500;
 let breakSessionDuration = 300;
 let currentTimeLeftInSession = 1500;
@@ -36,7 +38,10 @@ resetButton.addEventListener('click', () => {
     sessionLength.innerText = 1500/60;
     breakLength.innerText = 300/60;
     currentTimeLeftInSession = 1500;
+    timerLabel.innerText = 'Session';
     displayCurrentTimeLeftInSession();
+    audio.pause();
+    audio.currentTime = 0;
     
     console.log(isReset)
 })
@@ -96,16 +101,16 @@ const displayCurrentTimeLeftInSession = () => {
     console.log(secondsLeft);
     let result = '';
     const seconds = secondsLeft % 60;
-    console.log(seconds)
+    // console.log(seconds)
     //need to solve this at 60 -> 00
     const preMinutes = parseInt(secondsLeft / 60);
-    console.log('preMinutes:', preMinutes)
+    // console.log('preMinutes:', preMinutes)
     if (preMinutes === 60) {
         minutes = preMinutes;
-        console.log('60:', preMinutes)
+        // console.log('60:', preMinutes)
     } else {
         minutes = preMinutes % 60;
-        console.log('rest:', preMinutes % 60 )
+        // console.log('rest:', preMinutes % 60 )
     }
     // const minutes = parseInt(secondsLeft / 60) % 60;
     // if (parseInt(secondsLeft / 60) === 60) {
@@ -143,15 +148,21 @@ const stepDown = () => {
     } else if (currentTimeLeftInSession === 0) {
         // Timer is over -> if work switch to break, viceversa
         if (type === 'Session') {
-            console.log('enter Session')
-            currentTimeLeftInSession = breakSessionDuration
-            type = 'Break'
+            console.log('enter Session',currentTimeLeftInSession)
+            
+            type = 'Break';
+            currentTimeLeftInSession = parseInt(breakLength.innerText) * 60;
+            console.log('break length:', currentTimeLeftInSession)
             timerLabel.innerText = type;
+            audio.play()
         } else {
-            console.log('enter Break')
-            currentTimeLeftInSession = workSessionDuration
+            console.log('enter Break',currentTimeLeftInSession)
             type = 'Session'
+            console.log('sessionLength')
+            currentTimeLeftInSession = parseInt(sessionLength.innerText) * 60;
+            console.log('session length:', currentTimeLeftInSession)
             timerLabel.innerText = type;
+            audio.play()
         }
     }
 }
