@@ -23,7 +23,7 @@ let isReset = true;
 startButton.addEventListener('click', () => {
     if (isReset) {
         console.log('isResetCTLIS:', currentTimeLeftInSession)
-        // currentTimeLeftInSession = parseInt(sessionLength.innerText)*60;
+        currentTimeLeftInSession = parseInt(sessionLength.innerText)*60;
         
     }
     isReset = false;
@@ -38,7 +38,8 @@ resetButton.addEventListener('click', () => {
     sessionLength.innerText = 1500/60;
     breakLength.innerText = 300/60;
     currentTimeLeftInSession = 1500;
-    timerLabel.innerText = 'Session';
+    type = 'Session';
+    timerLabel.innerText = type;
     displayCurrentTimeLeftInSession();
     audio.pause();
     audio.currentTime = 0;
@@ -48,7 +49,6 @@ resetButton.addEventListener('click', () => {
 breakIncrement.addEventListener('click', () => {
     if (parseInt(breakLength.innerText) >= 1 && parseInt(breakLength.innerText) < 60 && isReset === true) {
         breakLength.innerText = parseInt(breakLength.innerText) + 1;
-        
   }
 })
 breakDecrement.addEventListener('click', () => {
@@ -147,22 +147,19 @@ const stepDown = () => {
         currentTimeLeftInSession--
     } else if (currentTimeLeftInSession === 0) {
         // Timer is over -> if work switch to break, viceversa
+        audio.play();
+        console.log('time left:', currentTimeLeftInSession)
         if (type === 'Session') {
-            console.log('enter Session',currentTimeLeftInSession)
-            
-            type = 'Break';
             currentTimeLeftInSession = parseInt(breakLength.innerText) * 60;
-            console.log('break length:', currentTimeLeftInSession)
-            timerLabel.innerText = type;
-            audio.play()
+            timerLabel.innerText = 'Break';
+            console.log(timerLabel.innerText,':',currentTimeLeftInSession)
+            type = 'Break';
         } else {
-            console.log('enter Break',currentTimeLeftInSession)
-            type = 'Session'
-            console.log('sessionLength')
             currentTimeLeftInSession = parseInt(sessionLength.innerText) * 60;
-            console.log('session length:', currentTimeLeftInSession)
-            timerLabel.innerText = type;
-            audio.play()
+            timerLabel.innerText = 'Session';
+            type = 'Session'
+            console.log(timerLabel.innerText,':', currentTimeLeftInSession)
+            // audio.play()
         }
     }
 }
