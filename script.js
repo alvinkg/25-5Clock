@@ -24,13 +24,6 @@ let count = 0;
 startButton.addEventListener('click', () => {
     console.log('Enter start', count, isReset)
     toggleClock();
-    // if (isReset) {
-    //     console.log('Enter isReset = TRUE')
-    //     toggleClock();
-    // } else {
-    //     console.log('Enter isReset = FALSE')
-    //     toggleClock();
-    // }
 })
 
 // RESET
@@ -104,18 +97,6 @@ const toggleClock = (reset) => {
 }
 
 const displayCurrentTimeLeftInSession = () => {
-    // console.log('Enter displayCurrentTimeLeftInSession')
-    // const presecondsLeft = currentTimeLeftInSession;
-
-    // alt 1
-    // if (isReset) {
-    //     secondsLeft = parseInt(sessionLength.innerText)*60 + 1;
-    //     isReset = false;
-    // } else {
-    //     secondsLeft = currentTimeLeftInSession;
-    // }
-
-    //alt 2
     secondsLeft = currentTimeLeftInSession;
     // console.log(secondsLeft);
     let result = '';
@@ -177,4 +158,12 @@ const timer = () => {
         }
     }
     displayCurrentTimeLeftInSession();
+}
+
+const togglePlayPauseIcons = (reset) => {
+    if (reset) {
+        console.log('true')
+    } else {
+        console.log('false')
+    }
 }
