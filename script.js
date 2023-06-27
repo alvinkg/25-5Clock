@@ -21,10 +21,14 @@ let isReset = true;
 
 // START
 startButton.addEventListener('click', () => {
+    console.log('start')
     if (isReset) {
-        console.log('isResetCTLIS:', currentTimeLeftInSession)
-        currentTimeLeftInSession = parseInt(sessionLength.innerText)*60;
-        
+        console.log('isReset = true')
+        // console.log('sessionLength.innerText',sessionLength.innerText)
+        // console.log('isResetCTLIS:', currentTimeLeftInSession)
+        // currentTimeLeftInSession = parseInt(sessionLength.innerText)*60;
+        // console.log('isResetCTLIS:', currentTimeLeftInSession)
+        // this branch does nothing to help!!!
     }
     isReset = false;
     console.log('state of isReset:', isReset)
@@ -33,18 +37,18 @@ startButton.addEventListener('click', () => {
 
 // RESET
 resetButton.addEventListener('click', () => {
+    console.log('reset')
     isReset = true;
-    toggleClock(true);
-    sessionLength.innerText = 1500/60;
-    breakLength.innerText = 300/60;
-    currentTimeLeftInSession = 1500;
-    type = 'Session';
-    timerLabel.innerText = type;
-    displayCurrentTimeLeftInSession();
-    audio.pause();
-    audio.currentTime = 0;
+    toggleClock(true); // reset toggleClock
+    sessionLength.innerText = 1500/60; // reset to 25 min
+    breakLength.innerText = 300/60; // reset to 5 min
+    // currentTimeLeftInSession = 1500; // reset timer to 25 min
+    type = 'Session'; 
+    timerLabel.innerText = type; // test does not like hard code
+    // displayCurrentTimeLeftInSession();
+    audio.pause(); // pause the audio if playing
+    audio.currentTime = 0;  // reset the audio back 
     
-    console.log(isReset)
 })
 breakIncrement.addEventListener('click', () => {
     if (parseInt(breakLength.innerText) >= 1 && parseInt(breakLength.innerText) < 60 && isReset === true) {
@@ -90,44 +94,35 @@ const toggleClock = (reset) => {
             // decrease time left / increase time spent
             //   currentTimeLeftInSession--;
             displayCurrentTimeLeftInSession();
-              stepDown();
+            stepDown();
         }, 1)
       }
     }
 }
 
 const displayCurrentTimeLeftInSession = () => {
+    // console.log('displayCurrentTimeLeftInSession')
     const secondsLeft = currentTimeLeftInSession;
-    console.log(secondsLeft);
+    // console.log(secondsLeft);
     let result = '';
     const seconds = secondsLeft % 60;
     // console.log(seconds)
-    //need to solve this at 60 -> 00
+
     const preMinutes = parseInt(secondsLeft / 60);
-    // console.log('preMinutes:', preMinutes)
     if (preMinutes === 60) {
         minutes = preMinutes;
-        // console.log('60:', preMinutes)
     } else {
         minutes = preMinutes % 60;
-        // console.log('rest:', preMinutes % 60 )
     }
-    // const minutes = parseInt(secondsLeft / 60) % 60;
-    // if (parseInt(secondsLeft / 60) === 60) {
-    //     minutes = 60;
-    // }
-    // function solveMinutes(preMinutes) {
-    //     return preMinutes < 60? preMinutes % 60
-    // }
-
-
+    // console.log(minutes)
     // add leading zeroes if it's less than 10
     function addLeadingZeroes(time) {
       return time < 10 ? `0${time}` : time
     }
     result += `${addLeadingZeroes(minutes)}:${addLeadingZeroes(seconds)}`
-    console.log('result:', result)
+    // console.log('result:', result)
     timeLeft.innerText = result.toString();
+    // console.log('timeLeft:', timeLeft.innerText)
 }
   
 const stopClock = () => {
@@ -136,16 +131,24 @@ const stopClock = () => {
     // 2) update our variable to know that the timer is stopped
     isClockRunning = false
     // reset the time left in the session to its original state
-    currentTimeLeftInSession = workSessionDuration
+    currentTimeLeftInSession = workSessionDuration;
     // update the timer displayed
     displayCurrentTimeLeftInSession()
 }
   
 const stepDown = () => {
     if (currentTimeLeftInSession > 0) {
-        // decrease time left / increase time spent
-        currentTimeLeftInSession--
+        console.log('stepDown > 0:',currentTimeLeftInSession )
+        console.log('timeLeft:', timeLeft.innerText)
+        if (isReset) {
+            displayCurrentTimeLeftInSession();
+        }
+        else {
+            // decrease time left / increase time spent
+            currentTimeLeftInSession--   
+        }
     } else if (currentTimeLeftInSession === 0) {
+        console.log('stepDown === 0:',currentTimeLeftInSession )
         // Timer is over -> if work switch to break, viceversa
         audio.play();
         console.log('time left:', currentTimeLeftInSession)
@@ -162,4 +165,5 @@ const stepDown = () => {
             // audio.play()
         }
     }
+    displayCurrentTimeLeftInSession();
 }
